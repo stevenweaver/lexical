@@ -1062,7 +1062,7 @@ export default function ToolbarPlugin({
             </DropDownItem>
             <DropDownItem
               onClick={() => {
-                showModal('Insert Image', (onClose) => (
+                showModal('Insert File', (onClose) => (
                   <InsertImageDialog
                     activeEditor={activeEditor}
                     onClose={onClose}
@@ -1070,8 +1070,8 @@ export default function ToolbarPlugin({
                 ));
               }}
               className="item">
-              <i className="icon image" />
-              <span className="text">Image</span>
+              <i className="icon selectFile" />
+              <span className="text">File</span>
             </DropDownItem>
             <DropDownItem
               onClick={() => {

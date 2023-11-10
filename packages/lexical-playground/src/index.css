@@ -242,6 +242,10 @@ pre::-webkit-scrollbar-thumb {
   background-image: url(images/icons/file-earmark-text.svg);
 }
 
+.selectFile {
+  background-image: url(images/icons/file-earmark-text.svg);
+}
+
 #test-recorder-button-snapshot {
   margin-right: auto;
 }

@@ -5,11 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  *
  */
+
+import {$createLinkNode} from '@lexical/link';
 import {useLexicalComposerContext} from '@lexical/react/LexicalComposerContext';
 import {$wrapNodeInElement, mergeRegister} from '@lexical/utils';
 import {
   $createParagraphNode,
   $createRangeSelection,
+  $createTextNode,
   $getSelection,
   $insertNodes,
   $isNodeSelection,
@@ -32,7 +35,7 @@ import {CAN_USE_DOM} from 'shared/canUseDOM';
 import landscapeImage from '../../images/landscape.jpg';
 import yellowFlowerImage from '../../images/yellow-flower.jpg';
 import {
-  $createImageNode,
+  //$createImageNode,
   $isImageNode,
   ImageNode,
   ImagePayload,
@@ -102,7 +105,7 @@ export function InsertImageUploadedDialogBody({
     const reader = new FileReader();
     reader.onload = function () {
       if (typeof reader.result === 'string') {
-        setSrc(reader.result);
+        setSrc(files[0].name);
       }
       return '';
     };
@@ -114,9 +117,9 @@ export function InsertImageUploadedDialogBody({
   return (
     <>
       <FileInput
-        label="Image Upload"
+        label="File Upload"
         onChange={loadImage}
-        accept="image/*"
+        accept="*"
         data-test-id="image-modal-file-upload"
       />
       <TextInput
@@ -220,7 +223,12 @@ export default function ImagesPlugin({
       editor.registerCommand<InsertImagePayload>(
         INSERT_IMAGE_COMMAND,
         (payload) => {
-          const imageNode = $createImageNode(payload);
+
+          // console.log(payload);
+
+          // INSERT FILE UPLOAD AND LINK GENERATION HERE
+
+          const imageNode = $createLinkNode('https://lexical.dev/').append($createTextNode(payload.src));
           $insertNodes([imageNode]);
           if ($isRootOrShadowRoot(imageNode.getParentOrThrow())) {
             $wrapNodeInElement(imageNode, $createParagraphNode).selectEnd();
